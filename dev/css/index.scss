@@ -1,0 +1,128 @@
+$blue: #1875e7;
+$side: left;
+$var: 10px;
+
+@mixin left {
+  float: left;
+  margin-left: 10px;
+}
+
+div {
+  color: $blue;
+  //@extend .class1;
+  h1 {
+    font-size: 20px;
+    border: {
+      color: red;
+      //width: 1px;
+      style: solid;
+    }
+  }
+}
+
+.rounded {
+  border-#{$side}-radius: 5px;
+}
+
+body {
+  position: absolute;
+  //margin: (14px / 2);
+  //top: 50px + 100px;
+  //right: $var * 10;
+}
+
+a {
+  &:hover {
+    color: #940c02;
+  }
+}
+
+/*!
+  hhhhhh
+*/
+
+.class1 {
+  border: 1px solid #ddd;
+}
+
+@mixin block($value:10px){
+  float: right;
+  margin-right: $value;
+}
+
+@mixin rounded($vert,$horz,$radius:11px){
+  border-#{$vert}-#{$horz}-radius:$radius;
+  -moz-border-radius-#{$vert}-#{$horz}:$radius;
+  -webkit-border-#{$vert}-#{$horz}-radius:$radius;
+}
+
+section{
+  @include block(30px);
+  @include rounded(top,left);
+  border-style: solid;
+  border-width: 1px;
+}
+article{
+  @include rounded(top,left,5px);
+  border-style: solid;
+  border-width: 1px;
+
+  color: #ddd;
+}
+
+$q:10;
+
+p{
+  @if $q<20 {
+    font-size: 30px;
+    color: green;
+    text-align: center;
+  }
+  @if $q>202{
+    font-size: 10px;
+    color: red;
+    text-align: right;
+  }
+}
+
+@for $i from 1 to 6 {
+  .b#{$i}{
+    //border :#{$i}px solid green;
+    opacity: #{$i/10};
+    margin: 0;
+    //background-color: green;
+    color: white;
+  }
+}
+
+$q:6;
+  @while $q>0{
+    .s#{$q}{
+      border :#{$q}px solid #ff4e00;
+      background-color: white;
+      opacity: #{$q/10};
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      content: 's';
+    }
+    $q:$q - 1;
+  }
+
+@each $member in a,b,c,d{
+    .#{$member}{
+      width: 200px;
+      height: 150px;
+      background: url("../img/#{$member}.png")no-repeat center;
+      background-size: contain;
+      float: left;
+    }
+}
+
+@function q($w){
+  @return $w * 2;
+}
+
+footer{
+  width:q(30px);
+}
